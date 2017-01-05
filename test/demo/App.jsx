@@ -64,6 +64,38 @@ export default class Demo extends React.Component {
               offsetY: 15
             }
           }
+        },
+        {
+          title: 'First Project',
+          text: 'First project completed',
+          textAlign: 'center',
+          selector: '.table table tr:nth-child(1) td:nth-child(3)',
+          position: 'top',
+          scrollContainerSelector: '.table-wrapper'
+        },
+        {
+          title: 'Mid Project',
+          text: 'Mid project completed',
+          textAlign: 'center',
+          selector: '.table table tr:nth-child(8) td:nth-child(9)',
+          position: 'top',
+          scrollContainerSelector: '.table-wrapper'
+        },
+        {
+          title: 'Last Project',
+          text: 'Last project completed',
+          textAlign: 'center',
+          selector: '.table table tr:nth-child(15) td:nth-child(4)',
+          position: 'top',
+          scrollContainerSelector: '.table-wrapper'
+        },
+        {
+          title: 'Last Project 2',
+          text: 'Last project completed other field',
+          textAlign: 'center',
+          selector: '.table table tr:nth-child(15) td:nth-child(5)',
+          position: 'top',
+          scrollContainerSelector: '.table-wrapper'
         }
       ],
       step: 0,
@@ -148,6 +180,23 @@ export default class Demo extends React.Component {
   }
 
   render() {
+    let sampleProjects = [];
+    let contentRows = [];
+    for (let i = 4; i <= 10; i++) {
+      contentRows.push(<td key={'content_' + i}>Content {i}</td>);
+    }
+
+    for (let i = 1; i <= 15; i++) {
+      sampleProjects.push(
+        <tr key={i}>
+          <td>Test Project {i}</td>
+          <td>Leon Kennedy</td>
+          <td>01-01-20{i < 10 ? '0' + i : i}</td>
+          {contentRows}
+        </tr>
+      );
+    }
+
     return (
       <div className="demo">
         <Joyride
@@ -158,6 +207,7 @@ export default class Demo extends React.Component {
           ref={c => (this.joyride = c)}
           run={this.state.running}
           scrollToFirstStep={true}
+          showSkipButton={true}
           stepIndex={this.state.step}
           steps={this.state.steps}
           type="continuous" />
@@ -200,6 +250,29 @@ export default class Demo extends React.Component {
           <div className="demo__section about">
             <div className="container">
               <h2><span>About</span></h2>
+            </div>
+          </div>
+          <div className="container">
+            <div className="table-wrapper table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Project Name</th>
+                    <th>Creator</th>
+                    <th>Date Completed</th>
+                    <th>Column 4</th>
+                    <th>Column 5</th>
+                    <th>Column 6</th>
+                    <th>Column 7</th>
+                    <th>Column 8</th>
+                    <th>Column 9</th>
+                    <th>Column 10</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sampleProjects}
+                </tbody>
+              </table>
             </div>
           </div>
         </main>
